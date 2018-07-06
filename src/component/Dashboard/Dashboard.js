@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 
 class Dashboard extends Component {
@@ -13,6 +14,7 @@ class Dashboard extends Component {
             posts: []
         }
         this.getPosts = this.getPosts.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -21,16 +23,26 @@ class Dashboard extends Component {
 
     getPosts() {
         let {search, myPosts} = this.state;
+        let url = '/api/posts';
         // a bunch of || and/or && here
+
+        axios.get(url)
+        .then(res => {
+            this.setState({posts: res.data})
+        })
     }
 
     reset() {
         let { myPosts } = this.state;
         let url = `/api/posts/${this.props.userId}`;
         if (myPosts) {
-            url += '?mine=true'
+            url += '?mypost=true'
             // query string is necessary to filter the posts by id. 
         }
+        axios.get(url)
+        .then(res => {
+            this.setState({posts: res.data, search: ''})
+        })
     }
 
 
@@ -51,7 +63,7 @@ class Dashboard extends Component {
             <div>
                 Dashboard
                 <button>Search</button>
-                <button>Reset</button>
+                <button onClick={this.reset}>Reset</button>
             </div>
         )
     } 

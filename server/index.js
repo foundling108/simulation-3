@@ -12,6 +12,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/', express.static(__dirname));
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
 
 massive(process.env.CONNECTION_STRING)
 .then( dbInstance => {
