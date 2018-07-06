@@ -21,6 +21,16 @@ class Dashboard extends Component {
 
     getPosts() {
         let {search, myPosts} = this.state;
+        // a bunch of || and/or && here
+    }
+
+    reset() {
+        let { myPosts } = this.state;
+        let url = `/api/posts/${this.props.userId}`;
+        if (myPosts) {
+            url += '?mine=true'
+            // query string is necessary to filter the posts by id. 
+        }
     }
 
 
