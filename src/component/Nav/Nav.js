@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-function Nav() {
-    if( window.location.pathname !== '/' ) {
+function Nav(props) {
+
         return(
             <div>
             <div className='Navbar'>
-            Nav
+                <div style={{backgroundImage: `url('${props.profilePic}')`}} ></div>
+                <p>{props.username}</p>
             </div>
             <div>
               <Link to='/dashboard'><button>Home</button></Link>  
@@ -16,9 +17,7 @@ function Nav() {
             </div>
             </div>
         )
-    } else {
-        return null
-    }
+
 }
 
 function mapStateToProps(state) {

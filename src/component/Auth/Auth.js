@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
+import { updateUser } from './../../dux/reducer';
 import './Auth.css'
 
 
@@ -13,6 +16,12 @@ class Auth extends Component {
         }
         this.login = this.login.bind(this);
         this.register = this.register.bind(this);
+    }
+
+    handleInput(property, value) {
+        this.setState({
+            [property]: value
+        })
     }
 
     login() {
@@ -36,6 +45,12 @@ class Auth extends Component {
         return(
             <div className='Auth-body'>
                 <h1>Helo</h1>
+                <div>
+                    <p>Username:</p>
+                    <input value={this.state.username} onChange={e => this.handleInput('username', e.target.value)}/>
+                    <p>Password:</p>
+                    <input type="password" value={this.state.password} onChange={e => this.handleInput('password', e.target.value)}/>
+                </div>
                 <div className='button-box'>
                     <button onClick={this.login}>Login</button>
                     <button onClick={this.register}>Register</button>
@@ -45,4 +60,4 @@ class Auth extends Component {
     } 
 }
 
-export default Auth;
+export default connect( null, { updateUser }) (Auth);

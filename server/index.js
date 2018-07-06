@@ -2,13 +2,14 @@ require('dotenv').config();
 const express = require('express'),
   axios = require('axios'),
   massive = require('massive');
-//   session = require('express-session');
+  session = require('express-session'),
+  bodyParser = require('body-parser');
 
 // const controller = require('./controller.js');
 
 
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
 app.use('/', express.static(__dirname));
 
 
