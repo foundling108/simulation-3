@@ -28,8 +28,8 @@ app.post('/api/auth/register', (req, res) => {
         res.status(500).send({error: 'Server error'});
         console.log(err)
     });
-}
-)
+})
+
 function checkLoggedIn(req, res, next) {
     if (req.session.user) {
       next();
@@ -41,6 +41,10 @@ function checkLoggedIn(req, res, next) {
   app.get('/api/auth/login', checkLoggedIn, (req, res) => {
     res.json({ someSecureData: 123 });
   });
+
+  app.get('/api/posts', (req, res) => {
+
+  })
 
 
 

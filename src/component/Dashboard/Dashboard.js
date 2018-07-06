@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 class Dashboard extends Component {
@@ -7,10 +8,21 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
+            search: '',
             myPosts: true,
             posts: []
         }
+        this.getPosts = this.getPosts.bind(this);
     }
+
+    componentDidMount() {
+        this.getPosts();
+    }
+
+    getPosts() {
+        let {search, myPosts} = this.state;
+    }
+
 
     render() {
         let posts = this.state.posts.map((el) => {
@@ -19,7 +31,7 @@ class Dashboard extends Component {
                 <p>{el.title}</p>
                     <div>
                         <p>{el.author_id}</p>
-                        <img src={el.profile_pic} alt="User Picture"/>
+                        <img src={el.profile_pic} alt="User"/>
                     </div>
                 </div>
             </Link>
@@ -35,5 +47,10 @@ class Dashboard extends Component {
     } 
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+    return {
+        userId: this.userId
+    }
+}
+export default connect(mapStateToProps)(Dashboard);
 
