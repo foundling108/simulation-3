@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function Nav(props) {
-    if( props.location.pathname !== '/' ) {
+function Nav() {
+    if( window.location.pathname !== '/' ) {
         return(
             <div>
             <div className='Navbar'>
@@ -20,4 +21,7 @@ function Nav(props) {
     }
 }
 
-export default Nav;
+function mapStateToProps(state) {
+    return state
+}
+export default connect(mapStateToProps)(Nav);
